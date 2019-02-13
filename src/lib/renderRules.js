@@ -17,8 +17,18 @@ const renderRules = {
   },
 
   textgroup: (node, children, parent, styles) => {
+    const isOrderedItem = parent.find(p => p.type === 'ordered_list');
+    const isUnorderedItem = parent.find(p => p.type === 'bullet_list');
+
     return (
-      <Text key={node.key} style={styles.text}>
+      <Text
+        key={node.key}
+        style={[
+          styles.text,
+          !!isOrderedItem && styles.listOrderedItemText,
+          !!isUnorderedItem && styles.listUnorderedItemText,
+        ]}
+      >
         {children}
       </Text>
     );
@@ -187,7 +197,10 @@ const renderRules = {
       }
       return (
         <View key={node.key} style={styles.listOrderedItem}>
-          <Text style={styles.listOrderedItemIcon}>{listItemNumber}{node.markup}</Text>
+          <Text style={styles.listOrderedItemIcon}>
+            {listItemNumber}
+            {node.markup}
+          </Text>
           <View style={[styles.listItem]}>{children}</View>
         </View>
       );
