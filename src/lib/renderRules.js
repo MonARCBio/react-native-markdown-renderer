@@ -19,6 +19,7 @@ const renderRules = {
   textgroup: (node, children, parent, styles) => {
     const isOrderedItem = parent.find(p => p.type === 'ordered_list');
     const isUnorderedItem = parent.find(p => p.type === 'bullet_list');
+    const isBlockquote = parent.find(p => p.type === 'blockquote');
 
     return (
       <Text
@@ -27,6 +28,7 @@ const renderRules = {
           styles.text,
           !!isOrderedItem && styles.listOrderedItemText,
           !!isUnorderedItem && styles.listUnorderedItemText,
+          !!isBlockquote && styles.blockquoteText,
         ]}
       >
         {children}
