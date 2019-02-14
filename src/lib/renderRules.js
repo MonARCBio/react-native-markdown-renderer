@@ -17,9 +17,9 @@ const renderRules = {
   },
 
   textgroup: (node, children, parent, styles) => {
-    const isOrderedItem = hasParents('ordered_list');
-    const isUnorderedItem = parent.find(p => p.type === 'bullet_list');
-    const isBlockquote = parent.find(p => p.type === 'blockquote');
+    const isOrderedItem = hasParents(parent, 'ordered_list');
+    const isUnorderedItem = hasParents(parent, 'bullet_list');
+    const isBlockquote = hasParents(parent, 'blockquote');
 
     return (
       <Text
