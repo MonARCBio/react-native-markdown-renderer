@@ -17,7 +17,7 @@ const renderRules = {
   },
 
   textgroup: (node, children, parent, styles) => {
-    const isOrderedItem = parent.find(p => p.type === 'ordered_list');
+    const isOrderedItem = hasParents('ordered_list');
     const isUnorderedItem = parent.find(p => p.type === 'bullet_list');
     const isBlockquote = parent.find(p => p.type === 'blockquote');
 
@@ -124,7 +124,7 @@ const renderRules = {
   ),
 
   paragraph: (node, children, parent, styles) => (
-    <View key={node.key} style={styles.paragraph}>
+    <View key={node.key} style={parent.length === 0 && styles.paragraph}>
       {children}
     </View>
   ),
